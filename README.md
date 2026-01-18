@@ -24,7 +24,7 @@
 
 [5. BIG-IP Configuration](bigip/README.md)
 
-[6. Uers and Identity](users/README.md)
+[6. Users and Identity](users/README.md)
 
 [7. Multi-part GET or PUT](multipart/README.md)
 

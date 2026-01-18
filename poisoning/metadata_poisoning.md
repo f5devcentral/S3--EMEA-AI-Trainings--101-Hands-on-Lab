@@ -270,6 +270,10 @@ then click Submit
 You should see the object content being displayed on the page and, since the metadata is rendered as HTML, the stored XSS is triggered
 
 <br><br>
+<p align="center">
+	<img width="800" src="https://github.com/f5devcentral/S3--EMEA-AI-Trainings--101-Hands-on-Lab/blob/main/docs/xss_s3.jpg?raw=true" alt="UDF S3 Topo">
+</p>
+<br>
 
 ## Key Takeway / BIG-IP Mitigation
 

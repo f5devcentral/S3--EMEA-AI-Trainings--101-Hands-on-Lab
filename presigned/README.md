@@ -10,22 +10,35 @@ A pre-signed URL is meant to be easily shared and available for a limited amount
 After the admin specified expiration date, the link is not available anymore.
 
 
-a pre-signed URLcan be created for GET requests
+a pre-signed URL can be created to upload an object to a bucket for an amount of time (here it is configured for 168 hours, therefore 7 days):
 ```shell
-mc share download minio-101/bucket1/grades.pdf --expire 7d
+mc share upload minio-101/bucket1/test.txt --expire 168h
+URL: http://10.1.10.101:9000/bucket1/test.txt
+Expire: 7 days 0 hours 0 minutes 0 seconds
+Share: curl http://10.1.10.101:9000/bucket1/ -F bucket=bucket1 -F policy=eyJleHBpcmF0aW9uIjoiMjAyNi0wMS0yNVQyMzoxMjozMS41MDdaIiwiY29uZGl0aW9ucyI6W1siZXEiLCIkYnVja2V0IiwiYnVja2V0MSJdLFsiZXEiLCIka2V5IiwidGVzdC50eHQiXSxbImVxIiwiJHgtYW16LWRhdGUiLCIyMDI2MDExOFQyMzEyMzFaIl0sWyJlcSIsIiR4LWFtei1hbGdvcml0aG0iLCJBV1M0LUhNQUMtU0hBMjU2Il0sWyJlcSIsIiR4LWFtei1jcmVkZW50aWFsIiwiYWRtaW4vMjAyNjAxMTgvdXMtZWFzdC0xL3MzL2F3czRfcmVxdWVzdCJdXX0= -F x-amz-algorithm=AWS4-HMAC-SHA256 -F x-amz-credential=admin/20260118/us-east-1/s3/aws4_request -F x-amz-date=20260118T231231Z -F x-amz-signature=e27668b4822f2bff1292609cd7d27e24134780e787ec376e5d8d7daef1972e62 -F key=test.txt -F file=@<FILE>
+```
+
+You can then copy and paste the given curl command and reuse it as much as you want to upload the test.txt object to bucket1 during the allowed period of 7 days.
+:warning:
+> Remember, attackers can host malwares or overwrite existing files with malicious contents.
+
+
+a pre-signed URL can be created for GET requests
+```shell
+mc share download minio-101/bucket1/exercice1/object1.txt --expire 168h
+URL: http://10.1.10.101:9000/bucket1/exercice1/object1.txt
+Expire: 7 days 0 hours 0 minutes 0 seconds
+Share: http://10.1.10.101:9000/bucket1/exercice1/object1.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=admin%2F20260118%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260118T231730Z&X-Amz-Expires=604800&X-Amz-SignedHeaders=host&X-Amz-Signature=da6ff503efe4a6ae649adb81105e90fb231a5c61789b6f0b1b80ddb1f73f8eb3
 ```
 
 The curl command provided can be used in a script, to a user or just share the hashed header in a GET request code but it will be valid only for the specified amount of time.
-Remember, attackers can host malwares or overwrite existing files with malicious contents.
 
-```shell
-curl -X PUT --data "malware" https://minio-101/bucket1/update.bin
-```
+<br>
 
-It can also be created for PUT requests
-```shell
-mc share upload minio-101/bucket1/grades.pdf --expire 10m
-```
+Note:
+> certain S3 client and servers allow pre-signed POST to allow the upload of any objects on a specified bucket for a certain period of time (max. 7 days)
+
+
 
 ## 8.2 Risks of Pre-Signed URLs
 pre-signed URLs have several inherent risks:
@@ -68,67 +81,18 @@ First, we need to create a **string data group** that will contain the list of b
 - **Name:** `dg_presign_block_buckets`
 - **Type:** String
 - **Entries (keys only):**
-  ```text
+
+```text
   finance
   backups
   private-data
   logs
+```
 
-
+and the iRule:
 ```tcl
 when HTTP_REQUEST {
-    # Fast exit if no query string
-    if {[HTTP::query] eq ""} {
-        return
-    }
-
-    # Detect pre-signed URL (SigV4)
-    if { !(
-        [HTTP::query] contains "X-Amz-Signature=" ||
-        [HTTP::query] contains "X-Amz-Credential=" ||
-        [HTTP::query] contains "X-Amz-Expires="
-    ) } {
-        return
-    }
-
-    # -------------------------------
-    # Extract bucket name
-    # -------------------------------
-
-    set bucket ""
-
-    # Case 1: virtual-host style
-    #   bucket.s3.example.com
-    set host [string tolower [HTTP::host]]
-    if {[regexp {^([a-z0-9\-]+)\.} $host -> bucket]} {
-        # bucket extracted
-    } else {
-        # Case 2: path-style
-        #   /bucket/object
-        if {[regexp {^/([^/]+)/} [HTTP::path] -> bucket]} {
-            # bucket extracted
-        }
-    }
-
-    # If bucket still unknown, allow
-    if {$bucket eq ""} {
-        return
-    }
-
-    # -------------------------------
-    # Enforce deny list
-    # -------------------------------
-
-    if {[class match $bucket equals dg_presign_block_buckets]} {
-
-        log local0.warn "Blocked pre-signed URL for bucket=$bucket from [IP::client_addr]"
-
-        HTTP::respond 403 \
-            content "Pre-signed URLs are not allowed for this bucket." \
-            "Content-Type" "text/plain"
-
-        return
-    }
+TBD
 }
 ```
 

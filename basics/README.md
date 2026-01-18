@@ -67,10 +67,12 @@ now, you are ready to add objects to your bucket.
 ## 4.2 Upload an object in the bucket
 
 create a text file locally and upload it:
+
 ```shell
 echo "This is an object for Bucket1" > /tmp/object1.txt
 ```
 <br>
+
 now you can upload this object into your buckets:
 ```shell
 mc cp /tmp/object1.txt minio-101/bucket1/exercice1/object1.txt

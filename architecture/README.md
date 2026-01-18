@@ -1,6 +1,6 @@
-## 2. Lab Architecture
+# 2. Lab Architecture
 
-### 2.1 Diagram
+## 2.1 Diagram
 
 <p align="center">
 	<img width="800" src="https://github.com/fchmainy/s3_lab/blob/main/docs/architecture_s3_udf_lab.jpg?raw=true" alt="UDF S3 Topo">
@@ -8,7 +8,8 @@
 <br>
 <br>
 <br>
-### 2.2 Lab Components
+
+## 2.2 Lab Components
 
 | Virtual Machine | OS | Management | External IP Addresses | Internal IP Address |
 |--|--|-|--|--|
@@ -20,7 +21,8 @@
 
 <br>
 <br>
-### 2.3 Lab details you need to be aware of
+
+## 2.3 Lab details you need to be aware of
 
 This lab has been designed to work with Minio Open Source. 
 Very recently (Dec 2025), MinIO has put their OpenSource version under maintenance mode and release AIStor Free in replacement. We need to update the lab using this.

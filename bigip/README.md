@@ -209,7 +209,6 @@ we will use AST to collect BIG-IP metrics and enrich these metrics using Prometh
 <br>
 <br>
 
-minio_dashboard.jpg
 
 We have also provided the following iRule to stream events from the BIG-IP to an OpenTelemtry Collector that will export them into Loki.
 

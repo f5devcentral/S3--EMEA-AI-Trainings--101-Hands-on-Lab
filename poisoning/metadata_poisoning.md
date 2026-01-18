@@ -255,7 +255,9 @@ docker run -p 3000:3000 \
 Then upload a Malicious Object to the bucket
 
 ```shell
-mc alias set minio-101 http://10.1.20.101:9000 $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
+MINIO_ACCESS_KEY="admin"
+MINIO_SECRET_KEY="myPass12345"
+mc alias set via-proxy-minio-101 http://10.1.10.101:9000 $MINIO_ACCESS_KEY $MINIO_SECRET_KEY
 
 echo "This object is safe but should be scared about its metadata" > /tmp/test.txt
 mc mb minio-101/files

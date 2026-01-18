@@ -260,7 +260,7 @@ mc mb minio-101/files
 mc cp /tmp/test.txt minio-101/files --attr "description=<script>alert(1)</script>"
 ```  
 
-Finally, you can trigger the vulnerability by opening a browser to http://localhost:3000 to browse the vulnerable web application.
+Finally, you can trigger the vulnerability by opening a browser to http://localhost:3000 on the client to browse the vulnerable web application. You can also use the UDF access to **S3_object_browser** on the client.
 
   Bucket: **files**
   Object: **test.txt**

@@ -234,9 +234,9 @@ CMD ["node", "server.js"]
 Start by building the Container with the desired environment variables so it matches your lab
 
 ```bash
-MINIO-101="10.1.20.101:9000"
+MINIO-101="10.1.10.101:9000"
 MINIO_ACCESS_KEY="admin"
-MINIO_SECRET_KEY="MyPass12345"
+MINIO_SECRET_KEY="myPass12345"
 
 
 docker build -t s3-xss-demo .

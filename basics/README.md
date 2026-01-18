@@ -44,7 +44,7 @@ mc alias set minio-102 http://10.1.10.102:9000   "$MINIO_ACCESS_KEY" "$MINIO_SEC
 mc alias set minio-103 http://10.1.10.103:9000   "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY"
 mc alias set minio-104 http://10.1.10.104:9000   "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY"
 mc alias set minio-105 http://10.1.10.105:9000   "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY"
-mc alias set demovip https://vip2.s3.f5demo.com "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY" --insecure
+mc alias set demovip https://mixed.s3.f5demo.com "$MINIO_ACCESS_KEY" "$MINIO_SECRET_KEY" --insecure
 ```
 
 :notebook:

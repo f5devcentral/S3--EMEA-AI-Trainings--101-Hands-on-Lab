@@ -13,13 +13,9 @@
 | Virtual Machine | OS | Management | External IP Addresses | Internal IP Address |
 |--|--|-|--|--|
 | Client | Ubuntu 22.04 | 10.1.1.101 | 10.1.10.101 | None |
-| BIG-IP | TMOS v21.0 | 10.1.1.11 | 10.1.10.11 | 10.1.20.11 |
-| S3 Server | Ubuntu 22.04 | 10.1.1.51 | None | 10.1.20.101 (minio-101) {"Console": "TCP/9001", "API": "TCP/9000"}  |
-|||||10.1.20.102 (minio-102) |
-|||||10.1.20.103 (minio-103) |
-|||||10.1.20.104 (minio-104) |
-|||||10.1.20.105 (minio-105) |
-| Analytics | Ubuntu 22.04 | 10.1.1.61 | None | 10.1.20.201 |
+| BIG-IP | TMOS v21.0 | 10.1.1.8 | 10.1.20.20 (self-IP) <br> 10.1.20.21 to 10.1.20.25 (VIPs) | 10.1.10.20 (self-IP) <br> 10.1.10.21 to 10.1.10.25 (SNATs) |
+| S3 Server | Ubuntu 22.04 | 10.1.1.51 | None | 10.1.20.101..105 (minio-101.. minio-105)<br> Console: "TCP/9001", API: "TCP/9000"  |
+| Analytics | Ubuntu 22.04 | 10.1.1.61 | None | 10.1.20.201 (Prometheus) <br>10.1.20.202 (Grafana) <br>10.1.20.201 (F5-OTLP) <br>10.1.20.201 (OTLP)|
 |--|--|--|--|--|
 
 <br>

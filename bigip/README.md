@@ -105,10 +105,13 @@ Then OneConnect adds the following benefits:
  - Improve backend node utilization
  - Increase throughput and lower latency
 
+
 <p align="center">
-	<img width="500" src="https://github.com/fchmainy/s3_lab/blob/main/docs/oneConnect.jpg?raw=true" alt="One Connect Menu">
+	<img width="800" src="https://github.com/f5devcentral/S3--EMEA-AI-Trainings--101-Hands-on-Lab/blob/main/docs/oneConnect?raw=true" alt="One Connect Menu">
 </p>
 <br>
+<br>
+
 
 First, we want to keep a fair number of maximum reuse, especially if you are dealing with large objects (>1GB) uploads so we do not introduce uneven nodes pressure. Let's take 20 and if the objects are smaller we could increase this number progressively.
 Second, let's prevents long-lived idle connections pinning backend nodes

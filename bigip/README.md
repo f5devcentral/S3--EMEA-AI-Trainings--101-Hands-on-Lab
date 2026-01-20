@@ -218,7 +218,7 @@ on Grafana, we have added a set a second set of dashboards.
 
 <p align="center">
 	<img width="500" src="https://github.com/fchmainy/s3_lab/blob/main/docs/s3_bucket_stats.jpg?raw=true" alt="Grafana Bucket Stats">
-	<img width="500" src="https://github.com/fchmainy/s3_lab/blob/main/docs/Telemetry_s3_udf.jpg?raw=true" alt="Grafana S3 metrics">
+	<img width="500" src="https://github.com/fchmainy/s3_lab/blob/main/docs/minio_dashboard.jpg?raw=true" alt="Grafana S3 metrics">
 </p>
 <br>
 <br>

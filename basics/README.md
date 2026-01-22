@@ -87,7 +87,7 @@ Let's debug this request so we can understand what the mc client did here:
 We are going to add the **debug** attribute to the request so we can see the HTTP requests issued between the client and the S3 node.
 
 ```shell
-mc --debug cp ./object1.txt minio-101/bucket1/exercice1/object1.txt
+mc --debug cp /tmp/object1.txt minio-101/bucket1/exercice1/object1.txt
 ```
 You should get a similar reponse from the server:
 

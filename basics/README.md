@@ -446,8 +446,16 @@ mc anonymous set public minio-101/bucket1
 
 By setting the bucket anonymous, you have removed the authentication entirely.
 
+You can now list the whole content of the bucket:
+
 ```shell
 curl http://10.1.10.101:9000/bucket1/
+```
+
+access any object within the bucket:
+
+```shell
+curl http://10.1.10.101:9000/bucket1/exercice1/object1.txt
 ```
 
 ```yaml
@@ -561,7 +569,8 @@ curl http://10.1.10.101:9000/bucket1/
 </ListBucketResult>
 ```
 
-or even worst (**DON'T DO IT!** This is only to make you understand the potential impact of making a bucket public):
+or even worst (**DON'T DO IT!** This is only to make you understand the potential impact of making a bucket public), delete objects:
+
 ```shell
 curl -X DELETE http://10.1.10.101:9000/bucket1/exercice1/object2.txt
 ```

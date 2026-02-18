@@ -204,7 +204,7 @@ when HTTP_REQUEST {
     set bucket ""
 
 
-    if { $method eq "GET" || $method eq "PUT" || $method eq "HEAD" } {
+    if { $method eq "GET" || $method eq "POST" || $method eq "HEAD" } {
         if {
             [string match "*X-Amz-Algorithm=*"  $qs] &&
             [string match "*X-Amz-Credential=*" $qs] &&

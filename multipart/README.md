@@ -40,21 +40,19 @@ The core reasons for multipart:
 <br><br>
 ## 7.2 Anatomy of multipart objects
 
-The request flow when you do multi-part uploads is the following:
+The request flow when you do multi-part uploads (MPU) is the following:
 
     1. POST /<bucket>/<object>?uploads                        # returns an UploadId
     2. PUT /<bucket>/<object>?partNumber=1&uploadId=XYZ       # upload the first part number
     3. PUT /<bucket>/<object>?partNumber=2&uploadId=XYZ       # upload the second part number
     4. POST /<bucket>/<object>?uploadId=XYZ                   # Comple the upload
 
-The S3 node returns an automatic generated uploadId that is used for every part of the upload. All the parts have to land on the same node, otherwise the upload will fail
-
-
-BUT, why can't we set a basic Source IP persistence. Because workloads may reside on Kubernetes clusters, you may never reach a fair load balancing across all S3 nodes.
+If you have a S3 cluster that shares the same backend storage it is fine, you do not need any form of persisteny and every part of the MPU could land on any node of the cluster. The initial S3 request, when reaching the first S3 node, will get an automatically generated **uploadId** that is used for every part of the upload. In most of the use cases, except if local caching is needed or you have different clusters within a same load balancing pool, it does not matter where each MPU land.
+You could still add a CARP persistency but it is not mandatory.
 
 
 ## 7.3 Managing multipart through the BIG-IP
-To handle the S3 multipart uploads and downloads we need to make sure our CARP persistence iRule takes into account the trailing information of the **uploadID** so any part request of an upload or download always land on the same pool member.
+To handle CARP persistence iRule takes into account the trailing information of the **uploadID** so any part request of an upload or download always land on the same pool member.
 
 ```tcl
 when HTTP_REQUEST {

@@ -279,7 +279,7 @@ You should see the object content being displayed on the page and, since the met
 ## Key Takeway / BIG-IP Mitigation
 
 Metadata is oftenly treated as trusted cause it is just static headers and description.
-S3 is rarely behind a WAF because since the payload is Canonically hashed it is not interpretable by any WAF.
+S3 is rarely behind a WAF because objects are rarely interpreted by a web app, at least for AI use cases; They can however carry other attacks vectors, like prompt injections or RAG poisoning but we will cover them later in a different lab.
 But, you need to make sure that all applications that are consuming objects contents and especially their metadata are protected.
 
 

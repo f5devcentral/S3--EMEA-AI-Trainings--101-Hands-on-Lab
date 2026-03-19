@@ -30,7 +30,7 @@ This profiles enables a seamless TLS offload, improve encrypted communication pe
 
 CARP (Cache Array Routing Protocol) is a deterministic hashing algorithm used to map a URI path to the same backend node.
 
-As you saw previously, S3 is not a stateless HTTP workload and the bucket and object names (including object versions) are located in the path and Without persistence, S3 breaks.
+As you saw previously, S3 is not a stateless HTTP workload and the bucket and object names (including object versions) are located in the path.
 
  - **Same cluster, Erasure Set:**
 Usually, in a single cluster operation, with Erasure Coding set as your default replication strategy, when you PUT an object on a node and you request the same object on the same bucket on a different node (because you do not have a proper persistence configuration), it does not matter, you don't need any persistence:: the object is rebuilt from all the shards before delivering it.
@@ -39,8 +39,8 @@ Usually, in a single cluster operation, with Erasure Coding set as your default 
 When you do replication, ach object is stored as full copies across multiple nodes/disks (x2 or xN copies). Then, the fastest way to get the object is konwing where you uploaded it. If you are load balanced on a different node within the cluster, the object is first copied locally on the node you landed on before delivering to you which adds more or less latency based on the object size.
 <br>
  - **Multipart PUT**
-Multipart uploads and downloads require persistence.
-We will see later in the lab the details on multipart and why it makes sense to have CARP persistence on it 
+Multipart uploads and downloads don't require persistence, you could add it to ensure all shards of the same object arrive on the same node mostly for journalisation.
+
 [S3 Multipart](/multipart/README.md)
 
 <br>
